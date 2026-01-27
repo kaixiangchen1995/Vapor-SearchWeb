@@ -16,6 +16,7 @@
 
 ## 📂 Directory Structure
 
+```
 src/
 ├── api/ # API endpoint definitions and service layer
 ├── requests/ # Axios instances and interceptor configurations
@@ -25,7 +26,4 @@ src/
 ├── store/ # Redux Toolkit (slices, store, and middleware)
 ├── hooks/ # Custom React hooks (e.g., useDebounce for search optimization)
 └── types/ # Global TypeScript type definitions and interfaces
-
-```
-
 ```
