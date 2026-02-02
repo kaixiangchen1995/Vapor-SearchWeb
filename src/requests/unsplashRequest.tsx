@@ -2,9 +2,10 @@ import axios from "axios";
 
 const requestUnsplash = axios.create({
   baseURL: "https://api.unsplash.com/search",
-  timeout: 5000,
+  timeout: 10000,
 });
 
+// Request interceptor with retry logic
 requestUnsplash.interceptors.request.use(
   (config) => {
     config.headers["Authorization"] =
@@ -17,13 +18,18 @@ requestUnsplash.interceptors.request.use(
   },
 );
 
+// Response interceptor with error handling
 requestUnsplash.interceptors.response.use(
   (response) => {
-    return response.data;
+    return response;
   },
   (error) => {
-    if (!error.response) {
-      console.log("Connection failed. Please check your internet.");
+    if (error.response?.status === 429) {
+      console.error(
+        "Still being rate limited after multiple attempts. Please try again later.",
+      );
+    } else if (!error.response) {
+      console.error("Connection failed");
     }
     return Promise.reject(error);
   },

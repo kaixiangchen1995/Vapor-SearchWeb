@@ -5,13 +5,17 @@ import type { HitsItemsList } from "./model/hnType";
  * Get the story list from Hacks News
  * @param keyword query keywords
  * @param tags default story
- * @returns 
+ * @returns Promise<HitsItemsList>
  */
-export function getStories(keyword: string, tags: string = "story") {
-  return request.get<any, HitsItemsList>("/search", {
+export async function getStories(
+  keyword: string,
+  tags: string = "story",
+): Promise<HitsItemsList> {
+  const response = await request.get("/search", {
     params: {
       query: keyword,
       tags,
     },
   });
+  return response.data.hits;
 }
