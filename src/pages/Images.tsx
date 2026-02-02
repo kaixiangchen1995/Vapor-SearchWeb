@@ -70,7 +70,7 @@ export default function Images({}: Props) {
   return (
     <div className="p-5">
       <div className="max-w-7xl mx-auto">
-        <div className="columns-3">
+        <div className="columns-2 lg:columns-3">
           {results?.map(
             ({ id, alt_description, urls: { regular }, links: { html } }) => {
               return (
